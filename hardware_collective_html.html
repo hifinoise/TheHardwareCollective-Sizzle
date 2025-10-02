@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Collective - Bangalore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-enter { animation: fadeIn 1s ease-out; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+    <!-- Circuit background pattern -->
+    <div class="fixed inset-0 pointer-events-none opacity-10">
+        <svg class="w-full h-full">
+            <defs>
+                <pattern id="circuit" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+                    <path d="M 50 0 L 50 50 L 100 50" stroke="#f97316" stroke-width="2" fill="none"/>
+                    <circle cx="50" cy="50" r="4" fill="#f97316"/>
+                    <path d="M 150 100 L 150 150 L 100 150" stroke="#f97316" stroke-width="2" fill="none"/>
+                    <circle cx="100" cy="150" r="4" fill="#f97316"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#circuit)"/>
+        </svg>
+    </div>
+
+    <!-- Play button -->
+    <div class="fixed top-8 right-8 z-50">
+        <button id="playBtn" class="bg-orange-500 hover:bg-orange-600 text-white rounded-full p-4 shadow-lg transition-all transform hover:scale-110">
+            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <svg id="pauseIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="fixed top-0 left-0 right-0 h-1 bg-orange-200 z-40">
+        <div id="progressBar" class="h-full bg-orange-500 transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="audio" src="assets/firewalk.m4a"></audio>
+
+    <!-- Content sections -->
+    <div id="container" class="relative z-10">
+        <!-- Hero -->
+        <section id="hero" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full text-center">
+                <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">HARDWARE COLLECTIVE</div>
+                <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                    We meet once a month in Bangalore to build things that probably shouldn't exist but absolutely need to. Open hardware. Shared schematics. No gatekeeping. Just people who care about making stuff work.
+                </p>
+            </div>
+        </section>
+
+        <!-- What We Do -->
+        <section id="what-we-do" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">WHAT WE DO</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            Bring your half-finished project. That board that won't boot. The idea that seems impossible. We debug together, share war stories, pass around firmware like folk songs. Sometimes things work. Sometimes they catch fire. Always we learn.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who Hosts -->
+        <section id="who-hosts" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">WHO HOSTS</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            Amit started this whole thing. He's been taking apart electronics since childhood—radios, computers, anything with screws. The goal was never fixing. It was understanding how the pieces talked to each other.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full Stack -->
+        <section id="full-stack" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">FULL STACK</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            He builds everything. Frontend, backend, hardware, firmware. That's what happens when you're making something and there's nobody else to hand it off to. You figure it out or it doesn't get built.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Absurd Industries -->
+        <section id="absurd" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="mb-6">
+                            <div class="bg-white rounded-lg p-4 inline-block shadow-lg">
+                                <div class="text-2xl font-bold text-orange-600">ABSURD</div>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">ABSURD INDUSTRIES</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            Amit runs Absurd Industries. The name comes from Camus, not comedy. They make keyboards with AI, hardware you can modify, everything GPL licensed. Open systems are more interesting than closed ones, so why build walls?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why This Exists -->
+        <section id="why-exists" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">WHY THIS EXISTS</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            Hardware is hard. You need people who get it. Who understand that "works on my bench" isn't shipping. Who know the supply chain will betray you. Who've been there at 3am when nothing makes sense.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Reality -->
+        <section id="reality" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">THE REALITY</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            Prototype three just fried. The parts you need are backordered for months. Your timeline was optimistic to begin with. You order alternatives and redesign around what's actually available. This is the work.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Together -->
+        <section id="together" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">TOGETHER</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            Someone solved your exact power regulation problem last month. You help them debug their SPI communication. Schematics get forked and improved. This is how things actually move forward.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shipping -->
+        <section id="shipping" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">WHAT HAPPENS</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            The boards ship. Someone across the world forks your design, makes it better, sends back improvements. What you built six months ago is teaching someone today. That's the whole point of open hardware.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Obsession -->
+        <section id="obsession" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-400 to-orange-600 aspect-square"></div>
+                    </div>
+                    <div class="order-1 md:order-2">
+                        <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">THE OBSESSION</div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light">
+                            You wake up thinking about trace impedance. You sketch circuits on napkins. You read datasheets for entertainment. This probably isn't healthy but you're not stopping and neither are we.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join -->
+        <section id="join" class="min-h-screen flex items-center justify-center px-8 transition-all duration-1000">
+            <div class="max-w-5xl w-full text-center">
+                <div class="mb-6 text-orange-500 font-mono text-sm tracking-wider">NEXT MEETUP</div>
+                <p class="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 font-light mb-16">
+                    October 4th. Bring your project, your problems, your questions. We'll figure it out together.
+                </p>
+                
+                <h3 class="text-4xl font-light text-gray-900 mb-8">Come Build With Us</h3>
+                
+                <p class="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+                    Monthly meetups in Bangalore. Bring your projects, questions, or just curiosity. 
+                    Beginners welcome. Experts appreciated. Everyone learns.
+                </p>
+                
+                <div class="flex justify-center gap-8 mb-12">
+                    <div class="bg-white rounded-lg p-6 shadow-lg">
+                        <div class="text-xl font-bold text-orange-600">ABSURD</div>
+                        <div class="text-xs text-gray-600">INDUSTRIES</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 shadow-lg">
+                        <div class="text-xl font-bold text-orange-600">AMPERE</div>
+                        <div class="text-xs text-gray-600">WORKS</div>
+                    </div>
+                </div>
+                
+                <div class="space-y-3 text-xl mb-8">
+                    <a href="https://lu.ma/your-event-link" target="_blank" class="block text-orange-600 hover:text-orange-800 transition-colors">
+                        RSVP for October 4th →
+                    </a>
+                    <a href="https://discord.gg/DUSUtguG2H" target="_blank" class="block text-orange-600 hover:text-orange-800 transition-colors">
+                        Join our Discord →
+                    </a>
+                </div>
+                
+                <div class="text-sm text-gray-600">
+                    Questions? Hit us up on Discord or show up on the 4th. We'll be there.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Debug timer -->
+    <div class="fixed bottom-8 left-8 font-mono text-sm text-gray-600 bg-white rounded-lg px-4 py-2 shadow">
+        <span id="timer">0s</span> / <span id="section">LOADING</span>
+    </div>
+
+    <script>
+        // CONFIG: Set your audio end time here (must be >= 82)
+        const AUDIO_END_TIME = 84;
+        
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const progressBar = document.getElementById('progressBar');
+        const timer = document.getElementById('timer');
+        const sectionLabel = document.getElementById('section');
+        
+        const sections = [
+            { id: 'hero', title: 'HARDWARE COLLECTIVE', start: 0, end: 7 },
+            { id: 'what-we-do', title: 'WHAT WE DO', start: 7, end: 14 },
+            { id: 'who-hosts', title: 'WHO HOSTS', start: 14, end: 21 },
+            { id: 'full-stack', title: 'FULL STACK', start: 21, end: 28 },
+            { id: 'absurd', title: 'ABSURD INDUSTRIES', start: 28, end: 35 },
+            { id: 'why-exists', title: 'WHY THIS EXISTS', start: 35, end: 42 },
+            { id: 'reality', title: 'THE REALITY', start: 42, end: 52 },
+            { id: 'together', title: 'TOGETHER', start: 52, end: 59 },
+            { id: 'shipping', title: 'WHAT HAPPENS', start: 59, end: 66 },
+            { id: 'obsession', title: 'THE OBSESSION', start: 66, end: 73 },
+            { id: 'join', title: 'NEXT MEETUP', start: 73, end: 83 }
+        ];
+
+        let isPlaying = false;
+
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            } else {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const currentTime = audio.currentTime;
+            const duration = AUDIO_END_TIME;
+            
+            // Stop at configured end time
+            if (currentTime >= AUDIO_END_TIME) {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                isPlaying = false;
+                return;
+            }
+            
+            // Update progress bar
+            progressBar.style.width = `${(currentTime / duration) * 100}%`;
+            
+            // Update timer
+            timer.textContent = `${Math.floor(currentTime)}s`;
+            
+            // Find current section
+            const currentSection = sections.find(s => currentTime >= s.start && currentTime < s.end);
+            
+            if (currentSection) {
+                sectionLabel.textContent = currentSection.title;
+                
+                // Auto-scroll to section
+                const element = document.getElementById(currentSection.id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                
+                // Update opacity of all sections
+                sections.forEach(section => {
+                    const el = document.getElementById(section.id);
+                    if (el) {
+                        if (section.id === currentSection.id) {
+                            el.style.opacity = '1';
+                        } else {
+                            el.style.opacity = '0.3';
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
