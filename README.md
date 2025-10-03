@@ -111,27 +111,11 @@ project-root/
     └── soldering.jpg
 ```
 
-## Content Philosophy
-
-This page represents first contact for most people. The goal is:
-- **Welcoming but not pandering** - "Beginners welcome. Experts appreciated."
-- **Honest about the work** - Hardware is actually hard. We don't sugarcoat.
-- **Conversational, not corporate** - Amit's voice, not a marketing department.
-- **Action-oriented** - By the end, they should know exactly how to join.
-
-The copy deliberately avoids:
-- Excessive enthusiasm or hype
-- Gatekeeping language (no "10x engineers" nonsense)
-- Vague promises
-- Making it sound easier than it is
-
 ## Next Steps
 
 1. Amit reviews and edits copy in index.html
-2. Photography session for the 8 images
-3. Create Luma event and update link
-4. Test full playthrough with actual audio
-5. Deploy
+2. Take Useful elements, if any.
+3. Deploy??
 
 ---
 
